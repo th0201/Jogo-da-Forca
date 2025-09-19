@@ -13,6 +13,7 @@ Na implementação, o jogo é estruturado em componentes modulares, tais como o 
 
 
 REQUISITOS FUNCIONAIS
+
 RF01: Iniciar o jogo
 O sistema deve iniciar uma partida sorteando aleatoriamente uma palavra secreta de uma lista de palavras pré-definida.
 
