@@ -2,9 +2,10 @@
 
 DEFINIÇÃO DO PROJETO
 
-Desenvolvimento do Jogo da Forca com Java, Notação Z e Redes de Petri
+Desenvolvimento do Jogo da Forca com Java, Notação Z .
 
-Este projeto tem como objetivo desenvolver o Jogo da Forca, utilizando a linguagem de programação Java para sua implementação, em conjunto com técnicas formais de especificação e modelagem através da Notação z. 
+Este projeto tem como objetivo desenvolver o Jogo da Forca, utilizando a linguagem de programação Java para sua implementação, em conjunto com técnicas formais de especificação e modelagem através da Notação z. Desta forma,busca-se integrar teoria e prática no processo de construção de software,fortalecendo tanto o raciocínio lógico quanto a capacidade de especificação e implementação.  
+
 
 Implementação em Java
 
@@ -43,4 +44,19 @@ Após o fim da partida, o sistema deve oferecer a opção de iniciar uma nova ro
 
 RF10: Armazenar letras tentadas
 O sistema deve manter e exibir as letras já tentadas pelo jogador.
+
+REQUISITOS NÃO FUNCIONAIS
+
+RNF01: Usabilidade
+A interface deve ser clara, objetiva e fácil de usar.
+
+RNF02: Portabilidade
+O jogo deve ser executável em diferentes sistemas operacionais que suportem Java.
+
+RNF03: Confiabilidade
+O sistema não deve aceitar letras repetidas nem permitir que o jogador exceda o número de tentativas.
+
+RNF04: Documentação formal
+O projeto deve incluir especificações formais em Notação Z e modelos de comportamento com Redes de Petri, que descrevem os estados e transições do sistema.
+
 
