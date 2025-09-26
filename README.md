@@ -15,48 +15,114 @@ Na implementação, o jogo é estruturado em componentes modulares, tais como o 
 
 REQUISITOS FUNCIONAIS
 
-RF01: Iniciar o jogo
+RF01: Iniciar o jogo:
 O sistema deve iniciar uma partida sorteando aleatoriamente uma palavra secreta de uma lista de palavras pré-definida.
 
-RF02: Exibir palavra oculta
+RF02: Exibir palavra oculta:
 O sistema deve mostrar a palavra secreta ao jogador, substituindo as letras ainda não adivinhadas por linhas.
 
-RF03: Permitir tentativa de letra
+RF03: Permitir tentativa de letra:
 O sistema deve permitir que o jogador digite uma letra por tentativa.
 
-RF04: Verificar acerto ou erro
+RF04: Verificar acerto ou erro:
 O sistema deve verificar se a letra digitada pertence à palavra secreta.
 
-RF05: Atualizar estado da palavra
+RF05: Atualizar estado da palavra:
 Se a letra estiver correta, o sistema deve atualizar a palavra secreta revelando as posições corretas.
 
-RF06: Controlar tentativas restantes
+RF06: Controlar tentativas restantes:
 O sistema deve manter e exibir o número de tentativas incorretas restantes.
 
-RF07: Detectar fim de jogo
+RF07: Detectar fim de jogo:
 O sistema deve identificar se o jogador descobriu a palavra ou atingiu o número máximo de erros.
 
-RF08: Exibir mensagens de vitória ou derrota
+RF08: Exibir mensagens de vitória ou derrota:
 O sistema deve exibir mensagens de vitória ou derrota ao final da partida.
 
-RF09: Permitir reinício de jogo
+RF09: Permitir reinício de jogo:
 Após o fim da partida, o sistema deve oferecer a opção de iniciar uma nova rodada.
 
-RF10: Armazenar letras tentadas
+RF10: Armazenar letras tentadas:
 O sistema deve manter e exibir as letras já tentadas pelo jogador.
+
 
 REQUISITOS NÃO FUNCIONAIS
 
-RNF01: Usabilidade
+RNF01: Usabilidade:
 A interface deve ser clara, objetiva e fácil de usar.
 
-RNF02: Portabilidade
+RNF02: Portabilidade:
 O jogo deve ser executável em diferentes sistemas operacionais que suportem Java.
 
-RNF03: Confiabilidade
+RNF03: Confiabilidade:
 O sistema não deve aceitar letras repetidas nem permitir que o jogador exceda o número de tentativas.
 
-RNF04: Documentação formal
+RNF04: Documentação formal:
 O projeto deve incluir especificações formais em Notação Z e modelos de comportamento com Redes de Petri, que descrevem os estados e transições do sistema.
 
 
+DIAGRAMA DE CLASSES
+
+@startuml
+
+class JogoDaForca {
+    - palavraSecreta : String
+    - tentativasRestantes : int
+    - letrasCorretas : List
+    - letrasErradas : List
+    + iniciarJogo() : void
+    + verificarLetra(letra : char) : boolean
+    + verificarFimDeJogo() : boolean
+    + realizarLogin(usuario : String, senha : String) : boolean
+}
+
+class Jogador {
+    - nome : String
+    - usuario : String
+    - senha : String
+    + Jogador(nome : String, usuario : String, senha : String)
+    + autenticar(usuario : String, senha : String) : boolean
+}
+
+class ListaDePalavras {
+    - palavras : List
+    + sortearPalavra() : String
+}
+
+JogoDaForca --> Jogador : "possui"
+JogoDaForca --> ListaDePalavras : "usa"
+
+@enduml
+
+
+
+DIAGRAMA DE CASOS DE USO
+
+@startuml
+left to right direction
+
+actor Jogador
+
+rectangle "Jogo da Forca" {
+    (Realizar Login) as login
+    (Iniciar Jogo) as iniciar_jogo
+    (Escolher Letra) as escolher_letra
+    (Mostrar Palavra Parcial) as parcial
+    (Mostrar Tentativas Restantes) as tentativas
+    (Verificar Vitória ou Derrota) as verificar
+    (Mostrar Resultado Final) as resultado
+    (Reiniciar Partida) as reiniciar
+}
+
+Jogador --> login
+login --> iniciar_jogo : <<include>>
+Jogador --> escolher_letra
+Jogador --> reiniciar
+
+escolher_letra --> parcial
+escolher_letra --> tentativas
+escolher_letra --> verificar
+iniciar_jogo --> verificar
+verificar --> resultado
+
+@enduml
