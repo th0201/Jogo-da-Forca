@@ -66,31 +66,51 @@ DIAGRAMA DE CLASSES
 @startuml
 
 class JogoDaForca {
+
     - palavraSecreta : String
+    
     - tentativasRestantes : int
+    
     - letrasCorretas : List
+    
     - letrasErradas : List
+    
     + iniciarJogo() : void
+    
     + verificarLetra(letra : char) : boolean
+    
     + verificarFimDeJogo() : boolean
+    
     + realizarLogin(usuario : String, senha : String) : boolean
+    
 }
 
 class Jogador {
+
     - nome : String
+    
     - usuario : String
+    
     - senha : String
+    
     + Jogador(nome : String, usuario : String, senha : String)
+    
     + autenticar(usuario : String, senha : String) : boolean
+    
 }
 
 class ListaDePalavras {
+
     - palavras : List
+    
     + sortearPalavra() : String
+    
 }
 
 JogoDaForca --> Jogador : "possui"
+
 JogoDaForca --> ListaDePalavras : "usa"
+
 
 @enduml
 
@@ -99,30 +119,48 @@ JogoDaForca --> ListaDePalavras : "usa"
 DIAGRAMA DE CASOS DE USO
 
 @startuml
+
 left to right direction
+
 
 actor Jogador
 
 rectangle "Jogo da Forca" {
+
     (Realizar Login) as login
+    
     (Iniciar Jogo) as iniciar_jogo
+    
     (Escolher Letra) as escolher_letra
+    
     (Mostrar Palavra Parcial) as parcial
+    
     (Mostrar Tentativas Restantes) as tentativas
+    
     (Verificar Vitória ou Derrota) as verificar
+    
     (Mostrar Resultado Final) as resultado
+
     (Reiniciar Partida) as reiniciar
+    
 }
 
 Jogador --> login
+
 login --> iniciar_jogo : <<include>>
+
 Jogador --> escolher_letra
+
 Jogador --> reiniciar
 
 escolher_letra --> parcial
+
 escolher_letra --> tentativas
+
 escolher_letra --> verificar
+
 iniciar_jogo --> verificar
+
 verificar --> resultado
 
 @enduml
