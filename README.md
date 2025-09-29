@@ -12,31 +12,7 @@ Implementação em Java
 A aplicação principal do projeto é a implementação do jogo da forca, em que o jogador tenta adivinhar uma palavra secreta, apenas fornecendo letras, com um número limitado de tentativas. A linguagem Java foi escolhida por ser uma linguagem que já estamos acostumados a trabalhar.
 Na implementação, o jogo é estruturado em componentes modulares, tais como o controle das letras tentadas, verificação de acertos e erros, atualização da palavra secreta, limite de erros antes do enforcamento, exibição da palavra secreta, letras digitadas e desenho do boneco da forca e a lista de palavras a serem sorteadas.
 
-Plano para a Especificação Formal
 
-A especificação formal do Jogo da Forca será desenvolvida utilizando a Notação Z, com o intuito de
-representar de maneira rigorosa e sem ambiguidades os estados e operações do sistema. O objetivo
-desse plano é estabelecer um roteiro claro para a modelagem formal, servindo de ponte entre a
-definição de requisitos e a especificação matemática completa.
-Inicialmente, será definida a estrutura de estados do jogo, que inclui a palavra secreta escolhida, o
-conjunto de letras já tentadas, o número de erros cometidos, o limite máximo de erros permitidos e a
-situação atual da partida (em andamento, vitória ou derrota).
-Em seguida, serão descritas as condições iniciais do sistema, que contemplam a ausência de letras
-tentadas no início da partida, o número de erros igual a zero e a escolha de uma palavra secreta
-sorteada a partir de uma lista pré-definida.
-As operações principais a serem modeladas incluem: autenticação de usuário (cadastro e login),
-inicialização de uma nova partida, tentativa de uma letra, verificação de acertos e erros, atualização do
-estado da palavra, checagem das condições de vitória ou derrota e reinício de jogo após o término de
-uma rodada.
-Além disso, serão estabelecidas restrições formais que garantem o funcionamento correto do sistema,
-como a proibição de repetição de letras já tentadas, a impossibilidade de ultrapassar o número máximo
-de erros permitido e a obrigatoriedade de que todas as letras tentadas pertençam ao alfabeto válido.
-Por fim, a especificação em Z será estruturada em diferentes schemas: um schema de estado
-representando as variáveis principais do jogo, um schema de inicialização descrevendo o estado
-inicial e um conjunto de schemas de operações correspondentes às interações do jogador com o
-sistema.
-Dessa forma, o plano assegura que a especificação formal seja organizada, consistente e adequada
-para guiar a implementação do jogo em Java.
 
 
 REQUISITOS FUNCIONAIS
