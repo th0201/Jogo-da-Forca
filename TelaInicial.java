@@ -52,8 +52,8 @@ public class TelaInicial extends JFrame {
         jogarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose(); // fecha a tela inicial
-                new InterfaceGUI(); // abre o jogo
+                dispose();
+                new InterfaceGUI();
             }
         });
 
