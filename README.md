@@ -183,3 +183,9 @@ Além disso, serão estabelecidas restrições formais que garantem o funcioname
 Por fim, a especificação em Z será estruturada em diferentes schemas: um schema de estado representando as variáveis principais do jogo, um schema de inicialização descrevendo o estado inicial e um conjunto de schemas de operações correspondentes às interações do jogador com o sistema.
 Dessa forma, o plano assegura que a especificação formal seja organizada, consistente e adequada para guiar a implementação do jogo em Java.
 
+
+ODS
+
+O nosso jogo da forca foi desenvolvido com base na ODS 4: "Educação de Qualidade", que faz parte dos Objetivos de Desenvolvimento Sustentável da ONU. Essa ODS tem como propósito assegurar uma educação inclusiva e de qualidade, promovendo oportunidades de aprendizagem ao longo da vida para todos.
+
+A partir dela, buscamos criar uma atividade lúdica que estimule o aprendizado de forma divertida e acessível, reforçando conteúdos e incentivando o raciocínio, a atenção e o desenvolvimento cognitivo. Assim, o jogo da forca contribui para tornar o processo educativo mais interativo e significativo.
