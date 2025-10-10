@@ -9,12 +9,12 @@ public class TelaInicial extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
-        getContentPane().setBackground(Color.WHITE); // fundo branco
+        getContentPane().setBackground(Color.WHITE);
 
         
-        JLabel titulo = new JLabel("ForcaPetri", SwingConstants.CENTER);
+        JLabel titulo = new JLabel("Jogo da Forca", SwingConstants.CENTER);
         titulo.setFont(new Font("Arial", Font.BOLD, 38));
-        titulo.setForeground(new Color(0, 102, 204)); // azul forte
+        titulo.setForeground(new Color(0, 102, 204));
         titulo.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         add(titulo, BorderLayout.NORTH);
 
@@ -41,7 +41,7 @@ public class TelaInicial extends JFrame {
         
         JButton jogarBtn = new JButton("Jogar");
         jogarBtn.setFont(new Font("Arial", Font.BOLD, 22));
-        jogarBtn.setBackground(new Color(0, 102, 204)); // azul forte
+        jogarBtn.setBackground(new Color(0, 102, 204));
         jogarBtn.setForeground(Color.WHITE);
         jogarBtn.setFocusPainted(false);
         jogarBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
