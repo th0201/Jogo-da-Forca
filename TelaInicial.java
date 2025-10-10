@@ -11,14 +11,14 @@ public class TelaInicial extends JFrame {
         setLayout(new BorderLayout());
         getContentPane().setBackground(Color.WHITE); // fundo branco
 
-        // 🔹 Título estilizado
+        
         JLabel titulo = new JLabel("ForcaPetri", SwingConstants.CENTER);
         titulo.setFont(new Font("Arial", Font.BOLD, 38));
         titulo.setForeground(new Color(0, 102, 204)); // azul forte
         titulo.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         add(titulo, BorderLayout.NORTH);
 
-        // 🔹 Painel do boneco centralizado
+        
         JPanel painelBoneco = new JPanel(new GridBagLayout());
         painelBoneco.setBackground(Color.WHITE);
 
@@ -38,7 +38,7 @@ public class TelaInicial extends JFrame {
         painelBoneco.add(boneco);
         add(painelBoneco, BorderLayout.CENTER);
 
-        // 🔹 Botão estilizado
+        
         JButton jogarBtn = new JButton("Jogar");
         jogarBtn.setFont(new Font("Arial", Font.BOLD, 22));
         jogarBtn.setBackground(new Color(0, 102, 204)); // azul forte
