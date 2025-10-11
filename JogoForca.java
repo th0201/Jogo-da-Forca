@@ -28,4 +28,18 @@ public class JogoForca {
         this.rede = new RedePetri(palavra.length());
     }
 
+    public String tentarLetra(char letra) {
+        letra = Character.toUpperCase(letra);
+        boolean letraJaTentada = letrasTentadas.contains(letra);
+        letrasTentadas.add(letra);
+
+        boolean correta = rede.tentarLetra(letra, palavra, letraJaTentada);
+        if (correta) {
+            for (int i = 0; i < palavra.length(); i++) {
+                if (palavra.charAt(i) == letra) palavraOculta[i] = letra;
+            }
+        }
+        return new String(palavraOculta);
+    }
+
 }
