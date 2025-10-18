@@ -76,3 +76,23 @@ public class JogoForca extends JFrame {
                 "Camada gasosa que envolve a Terra."
         ));
     }
+
+    public JogoForca(String username, String tema) {
+        this.username = username;
+        this.tema = tema;
+        setTitle("JOGO DA FORCA — " + tema + " — Usuário: " + username);
+        setSize(800, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        escolherPalavra();
+        initComponents();
+    }
+
+    private void escolherPalavra() {
+        List<String> lista = palavrasPorTema.get(tema);
+        List<String> dicas = dicasPorTema.get(tema);
+        Random rand = new Random();
+        int index = rand.nextInt(lista.size());
+        palavraSecreta = lista.get(index).toUpperCase();
+        dicaAtual = dicas.get(index);
+    }
