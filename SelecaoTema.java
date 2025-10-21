@@ -25,3 +25,36 @@ public class SelecaoTema extends JFrame {
         initComponents();
     }
 
+private void initComponents() {
+        JLabel label = new JLabel("Escolha o tema:");
+        String[] temas = {"Meio Ambiente", "Energia Renovável", "Reciclagem", "Biodiversidade", "Mudança Climática"};
+        temaCombo = new JComboBox<>(temas);
+        iniciarBtn = new JButton("Iniciar Forca");
+
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setOpaque(false);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panel.add(label, gbc);
+        gbc.gridx = 1;
+        panel.add(temaCombo, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
+        panel.add(iniciarBtn, gbc);
+
+        getContentPane().add(panel, BorderLayout.CENTER);
+
+        iniciarBtn.addActionListener(e -> iniciarForca());
+    }
+
+    private void iniciarForca() {
+        String tema = (String) temaCombo.getSelectedItem();
+        JogoForca forca = new JogoForca(username, tema);
+        forca.setVisible(true);
+        this.dispose();
+    }
+}
