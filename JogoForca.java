@@ -96,3 +96,56 @@ public class JogoForca extends JFrame {
         palavraSecreta = lista.get(index).toUpperCase();
         dicaAtual = dicas.get(index);
     }
+
+    private void initComponents() {
+        String urlImagem = switch (tema) {
+            case "Meio Ambiente" ->
+                "https://i.pinimg.com/736x/de/5f/d4/de5fd462e425813b6aaf45440d737e4e.jpg";
+            case "Energia Renovável" ->
+                "https://i.pinimg.com/1200x/57/55/69/5755692199474101ca2bcad35090e780.jpg";
+            case "Reciclagem" ->
+                "https://i.pinimg.com/736x/06/f7/02/06f7024181c60c04c0de115235595358.jpg";
+            case "Biodiversidade" ->
+                "https://i.pinimg.com/736x/15/a6/d1/15a6d19a47064878a30b6d3c02684450.jpg";
+            case "Mudança Climática" ->
+                "https://i.pinimg.com/736x/99/9a/f3/999af354c5344e0ff41503a35bdf1592.jpg";
+            default ->
+                "https://i.imgur.com/wTzjPbd.jpg";
+        };
+
+        PainelDeFundo mainPanel = new PainelDeFundo(urlImagem);
+        mainPanel.setLayout(new BorderLayout());
+
+
+        labelPalavra = new JLabel(formataPalavra(), SwingConstants.CENTER) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setFont(getFont());
+                FontMetrics fm = g2d.getFontMetrics();
+                int x = (getWidth() - fm.stringWidth(getText())) / 2;
+                int y = (getHeight() + fm.getAscent() - fm.getDescent()) / 2;
+            
+                g2d.setColor(Color.BLACK);
+                g2d.drawString(getText(), x + 2, y + 2);
+                
+                g2d.setColor(Color.WHITE);
+                g2d.drawString(getText(), x, y);
+                g2d.dispose();
+            }
+        };
+        labelPalavra.setFont(new Font("Impact", Font.BOLD, 48));
+        labelPalavra.setOpaque(false);
+
+        
+        labelDica = new JLabel("Dica: " + dicaAtual, SwingConstants.CENTER);
+        labelDica.setFont(new Font("SansSerif", Font.BOLD, 22));
+        labelDica.setForeground(Color.BLACK);
+        labelDica.setOpaque(true);
+        labelDica.setBackground(new Color(255, 255, 255, 160)); // leve transparência
+        labelDica.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2, true));
+
+        
+        labelErros = new JLabel("Erros: ");
+        labelErros.setFont(new Font("SansSerif", Font.BOLD, 16));
+        labelErros.setForeground(Color.WHITE);
