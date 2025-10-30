@@ -149,3 +149,71 @@ public class JogoForca extends JFrame {
         labelErros = new JLabel("Erros: ");
         labelErros.setFont(new Font("SansSerif", Font.BOLD, 16));
         labelErros.setForeground(Color.WHITE);
+
+        // 🔹 Boneco
+        painelBoneco = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                desenharBoneco(g, tentativasErradas);
+            }
+        };
+        painelBoneco.setOpaque(false);
+        painelBoneco.setPreferredSize(new Dimension(300, 400));
+
+        // 🔹 Letras
+        painelLetras = new JPanel(new GridLayout(2, 14, 5, 5));
+        painelLetras.setOpaque(false);
+        for (int i = 0; i < 26; i++) {
+            char c = alfabeto.charAt(i);
+            JButton btn = new JButton(String.valueOf(c));
+            botoesLetra[i] = btn;
+            btn.setFont(new Font("Arial Black", Font.BOLD, 16));
+            btn.setBackground(new Color(240, 240, 240));
+            btn.setFocusPainted(false);
+            btn.addActionListener(e -> {
+                JButton origem = (JButton) e.getSource();
+                origem.setEnabled(false);
+                tentarLetra(origem.getText().charAt(0));
+            });
+            painelLetras.add(btn);
+        }
+
+        // Botão "Sair"
+        JButton btnSair = new JButton("Sair");
+        btnSair.setFont(new Font("SansSerif", Font.BOLD, 16));
+        btnSair.setForeground(Color.RED);
+        btnSair.setBackground(new Color(255, 220, 220));
+        btnSair.setFocusPainted(false);
+        btnSair.addActionListener(e -> {
+            int confirm = JOptionPane.showConfirmDialog(
+                    this,
+                    "Tem certeza que deseja sair do jogo?",
+                    "Sair",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+            if (confirm == JOptionPane.YES_OPTION) {
+                System.exit(0);
+            }
+        });
+        painelLetras.add(btnSair);
+
+        // Botão "Menu" para voltar à seleção de tema
+        JButton btnMenu = new JButton("Menu");
+        btnMenu.setFont(new Font("SansSerif", Font.BOLD, 16));
+        btnMenu.setForeground(Color.BLUE);
+        btnMenu.setBackground(new Color(220, 220, 255));
+        btnMenu.setFocusPainted(false);
+        btnMenu.addActionListener(e -> {
+            int confirm = JOptionPane.showConfirmDialog(
+                    this,
+                    "Deseja voltar ao menu de seleção de tema?",
+                    "Menu",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+            if (confirm == JOptionPane.YES_OPTION) {
+                dispose(); // fecha a janela atual
+                new SelecaoTema(username).setVisible(true); // abre o menu
+            }
+        });
+        painelLetras.add(btnMenu);
