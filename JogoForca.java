@@ -150,7 +150,7 @@ public class JogoForca extends JFrame {
         labelErros.setFont(new Font("SansSerif", Font.BOLD, 16));
         labelErros.setForeground(Color.WHITE);
 
-        // 🔹 Boneco
+        // Boneco
         painelBoneco = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -161,7 +161,7 @@ public class JogoForca extends JFrame {
         painelBoneco.setOpaque(false);
         painelBoneco.setPreferredSize(new Dimension(300, 400));
 
-        // 🔹 Letras
+        // Letras
         painelLetras = new JPanel(new GridLayout(2, 14, 5, 5));
         painelLetras.setOpaque(false);
         for (int i = 0; i < 26; i++) {
@@ -217,3 +217,137 @@ public class JogoForca extends JFrame {
             }
         });
         painelLetras.add(btnMenu);
+
+    // Painel superior
+        JPanel topPanel = new JPanel(new GridLayout(2, 1, 0, 10));
+        topPanel.setOpaque(false);
+        topPanel.add(labelPalavra);
+        topPanel.add(labelDica);
+
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+        bottomPanel.setOpaque(false);
+        bottomPanel.add(painelLetras, BorderLayout.CENTER);
+        bottomPanel.add(labelErros, BorderLayout.SOUTH);
+
+        mainPanel.add(topPanel, BorderLayout.NORTH);
+        mainPanel.add(painelBoneco, BorderLayout.WEST);
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+
+        getContentPane().add(mainPanel);
+    }
+
+    private String formataPalavra() {
+        StringBuilder sb = new StringBuilder();
+        for (char c : palavraSecreta.toCharArray()) {
+            sb.append(letrasCorretas.contains(c) ? c + " " : "_ ");
+        }
+        return sb.toString().trim();
+    }
+
+    private void tentarLetra(char letra) {
+        if (letrasCorretas.contains(letra) || letrasErradas.contains(letra)) {
+            return;
+        }
+
+        if (palavraSecreta.indexOf(letra) >= 0) {
+            letrasCorretas.add(letra);
+        } else {
+            letrasErradas.add(letra);
+            tentativasErradas++;
+        }
+
+        labelPalavra.setText(formataPalavra());
+        labelErros.setText("Erros (" + letrasErradas.size() + "): " + letrasErradas);
+        painelBoneco.repaint();
+        checkEstado();
+    }
+
+    private void checkEstado() {
+        boolean ganhou = palavraSecreta.chars().allMatch(c -> letrasCorretas.contains((char) c));
+
+        if (ganhou) {
+            JOptionPane.showMessageDialog(this, "Parabéns, " + username + "! A palavra era: " + palavraSecreta);
+            iniciarProximaPalavraMesmoTema();
+        } else if (tentativasErradas >= MAX_ERROS) {
+            JOptionPane.showMessageDialog(this, "Você perdeu! A palavra era: " + palavraSecreta);
+            iniciarProximaPalavraMesmoTema();
+        }
+    }
+
+    private void iniciarProximaPalavraMesmoTema() {
+        letrasCorretas.clear();
+        letrasErradas.clear();
+        tentativasErradas = 0;
+        for (JButton btn : botoesLetra) {
+            btn.setEnabled(true);
+        }
+        escolherPalavra();
+        labelPalavra.setText(formataPalavra());
+        labelErros.setText("Erros: ");
+        labelDica.setText("Dica: " + dicaAtual);
+        painelBoneco.repaint();
+    }
+
+    private void desenharBoneco(Graphics g, int erros) {
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        //Base com relevo
+        GradientPaint grama = new GradientPaint(10, 350, new Color(34, 139, 34), 230, 350, new Color(0, 100, 0));
+        g2.setPaint(grama);
+        g2.fillRoundRect(10, 345, 220, 15, 10, 10);
+
+        //Tronco com gradiente madeira
+        GradientPaint madeiraVert = new GradientPaint(45, 50, new Color(139, 69, 19), 55, 350, new Color(101, 45, 0));
+        GradientPaint madeiraHori = new GradientPaint(45, 50, new Color(160, 82, 45), 165, 60, new Color(101, 45, 0));
+        g2.setPaint(madeiraVert);
+        g2.fillRoundRect(45, 50, 10, 300, 10, 10);
+        g2.setPaint(madeiraHori);
+        g2.fillRoundRect(45, 50, 120, 10, 10, 10);
+
+        //Corda
+        g2.setStroke(new BasicStroke(4));
+        g2.setColor(new Color(150, 75, 0)); // marrom claro
+        g2.drawLine(150, 50, 150, 90);
+
+        //Boneco com traços arredondados
+        g2.setColor(Color.BLACK);
+        g2.setStroke(new BasicStroke(5, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+
+        if (erros >= 1) {
+            g2.drawOval(130, 90, 40, 40); // cabeça
+
+        }
+        if (erros >= 2) {
+            g2.drawLine(150, 130, 150, 200); // tronco
+
+        }
+        if (erros >= 3) {
+            g2.drawLine(150, 140, 120, 180); // braço esquerdo
+
+        }
+        if (erros >= 4) {
+            g2.drawLine(150, 140, 180, 180); // braço direito
+
+        }
+        if (erros >= 5) {
+            g2.drawLine(150, 200, 120, 260); // perna esquerda
+
+        }
+        if (erros >= 6) {
+            g2.drawLine(150, 200, 180, 260); // perna direita
+        }
+        //Rosto triste se perdeu
+        if (erros >= 6) {
+            g2.drawLine(142, 100, 148, 105); // olho esquerdo
+            g2.drawLine(158, 100, 152, 105); // olho direito
+            g2.drawArc(140, 110, 20, 10, 0, -180); // boca triste
+        }
+
+        //Sombra da base
+        g2.setColor(new Color(0, 0, 0, 50));
+        g2.setStroke(new BasicStroke(8));
+        g2.drawLine(50, 350, 200, 350);
+    }
+
+}
