@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 
+
 public class PainelDeFundo extends JPanel {
 
     private Image imagemFundo;
@@ -14,7 +15,7 @@ public class PainelDeFundo extends JPanel {
         } catch (Exception e) {
             System.err.println("Erro ao carregar imagem de fundo: " + e.getMessage());
         }
-        setLayout(new BorderLayout());
+        setLayout(new BorderLayout()); 
     }
 
     @Override
