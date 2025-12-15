@@ -1,60 +1,57 @@
-
-import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class SelecaoTema extends JFrame {
+public class TemaSelectionFrame extends JFrame {
+   private String username;
+   private JComboBox<String> temaCombo;
+   private JButton iniciarBtn;
 
-    private String username;
-    private JComboBox<String> temaCombo;
-    private JButton iniciarBtn;
+   public TemaSelectionFrame(String var1) {
+      this.username = var1;
+      this.setTitle("Selecione Tema Sustentável");
+      this.setSize(400, 200);
+      this.setLocationRelativeTo((Component)null);
+      this.setDefaultCloseOperation(3);
+      this.initComponents();
+   }
 
-    public SelecaoTema(String username) {
-        this.username = username;
-        setTitle("Selecione Tema Sustentável");
-        setSize(400, 200);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        initComponents();
-    }
+   private void initComponents() {
+      JLabel var1 = new JLabel("Escolha o tema:");
+      String[] var2 = new String[]{"Meio Ambiente", "Energia Renovável", "Reciclagem", "Biodiversidade", "Mudança Climática"};
+      this.temaCombo = new JComboBox(var2);
+      this.iniciarBtn = new JButton("Iniciar Forca");
+      JPanel var3 = new JPanel(new GridBagLayout());
+      var3.setOpaque(false);
+      GridBagConstraints var4 = new GridBagConstraints();
+      var4.insets = new Insets(10, 10, 10, 10);
+      var4.gridx = 0;
+      var4.gridy = 0;
+      var3.add(var1, var4);
+      var4.gridx = 1;
+      var3.add(this.temaCombo, var4);
+      var4.gridx = 0;
+      var4.gridy = 1;
+      var4.gridwidth = 2;
+      var3.add(this.iniciarBtn, var4);
+      this.getContentPane().add(var3, "Center");
+      this.iniciarBtn.addActionListener((var1x) -> {
+         this.iniciarForca();
+      });
+   }
 
-private void initComponents() {
-        JLabel label = new JLabel("Escolha o tema:");
-        String[] temas = {"Meio Ambiente", "Energia Renovável", "Reciclagem", "Biodiversidade", "Mudança Climática"};
-        temaCombo = new JComboBox<>(temas);
-        iniciarBtn = new JButton("Iniciar Forca");
-
-        JPanel panel = new JPanel(new GridBagLayout());
-        panel.setOpaque(false);
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
-
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        panel.add(label, gbc);
-        gbc.gridx = 1;
-        panel.add(temaCombo, gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 2;
-        panel.add(iniciarBtn, gbc);
-
-        getContentPane().add(panel, BorderLayout.CENTER);
-
-        iniciarBtn.addActionListener(e -> iniciarForca());
-    }
-
-    private void iniciarForca() {
-        String tema = (String) temaCombo.getSelectedItem();
-        JogoForca forca = new JogoForca(username, tema);
-        forca.setVisible(true);
-        this.dispose();
-    }
+   private void iniciarForca() {
+      String var1 = (String)this.temaCombo.getSelectedItem();
+      ForcaFrame var2 = new ForcaFrame(this.username, var1);
+      var2.setVisible(true);
+      this.dispose();
+   }
 }
+
+
